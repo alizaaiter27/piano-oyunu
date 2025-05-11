@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Piano Tiles Oyunu</title>
+</head>
+<body>
+    <!-- Arka plan resmi -->
+    <img src="https://drive.google.com/uc?id=19zSLvSV1l4_bkxfaYUC9OpR1OZLBPZa_">
+    
+    <!-- Oyun başlangıç ekranı -->
+    <div class="start"> 
+        <button>Oyna</button>
+    </div> 
+
+    <!-- Ana oyun alanı -->
+    <div id="game" style="display: none;">
+        <!-- Oyun çizgileri -->
+        <div i="game-container">
+            <div class="line" id="line1"></div>
+            <div class="line" id="line2"></div>
+            <div class="line" id="line3"></div>
+            <div class="line" id="line4"></div>
+        </div>
+        <!-- Karelerin oluşturulacağı alan -->
+        <div class="tiles" id="tiles"></div> 
+        <!-- Skor göstergesi -->
+        <div class="score"><p id="score">0</p></div>
+    </div>
+
+    <!-- Sonuç ekranı -->
+    <div class="result_box">
+        <div class="icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="complete_text">Oyunu Tamamladınız!</div>
+        <div class="score_text">0 puan kazandınız</div>
+        <div class="buttons">
+            <button class="restart">Tekrar Oyna</button>
+        </div>
+    </div>
+
+    <!-- Ses efektleri -->
+    <audio id="audio" src="https://drive.google.com/uc?id=1vCDIoUu4NIjBlMOee-wTDsHBMc1bxzES" hidden>
+    <audio id="play" src="https://drive.google.com/uc?id=16ZqyQo4C59nUeXcP7H7L7XzUwrI7f3bW" hidden>
+    <audio id="out" src="https://drive.google.com/uc?id=1OtAEm0PY38LdtKPBRe_ucoysYkAY7cG2" hidden>
+    <audio id="result" src="https://drive.google.com/uc?id=1GvdIT1VsX48R9emQHCWxs4KP-hEQxeal" hidden>
+    
+</body>
+
+<!-- JavaScript dosyası -->
+<script src="js/src.js"></script>
+</html>
