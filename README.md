@@ -7,7 +7,7 @@ Modern bir Piano Tiles oyunu implementasyonu. Leaderboard sistemi ve çoklu şar
 - Çoklu şarkı desteği
 - Leaderboard sistemi
 - Responsive tasarım
-- Dokunmatik ve fare desteği
+- Dokunmatik ve klavye desteği
 - MySQL veritabanı entegrasyonu
 
 ## Teknolojiler
