@@ -162,6 +162,7 @@ start.querySelector("button").onclick = ()=>{
   ply.play();
   game.style.display = "block";
   start.style.display = "none";
+  document.querySelector(".dpuLogo").style.display = "none"; // Hide DPU logo
   score = 0;
   speed(400);
   setTimeout(startAudio, 1000);
