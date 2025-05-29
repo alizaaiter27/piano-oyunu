@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Piano Tiles Oyunu</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
     <!-- Ana oyun alanı -->
     <div id="game" style="display: none;">
         <!-- Oyun çizgileri -->
-        <div i="game-container">
+        <div id="game-container">
             <div class="line" id="line1"></div>
             <div class="line" id="line2"></div>
             <div class="line" id="line3"></div>
@@ -37,6 +38,22 @@
         </div>
         <div class="complete_text">Oyunu Tamamladınız!</div>
         <div class="score_text">0 puan kazandınız</div>
+        
+        <!-- İsim giriş formu -->
+        <div class="name_form" style="display: none;">
+            <input type="text" id="player_name" placeholder="İsminizi girin" maxlength="20">
+            <button id="save_score">Skoru Kaydet</button>
+        </div>
+
+        <!-- Top 3 Skorlar -->
+        <div class="top-scores">
+            <h3>En İyi 3 Skor</h3>
+            <div class="top-scores-list"></div>
+            <a href="leaderboard.html" class="view-all-scores">
+                Tüm Skorları Gör <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
         <div class="buttons">
             <button class="restart">Tekrar Oyna</button>
         </div>

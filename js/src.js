@@ -9,6 +9,10 @@ const results = document.getElementById("result"); // Sonuç sesi
 const result_box = document.querySelector(".result_box"); // Sonuç popup kutusu
 const restart = result_box.querySelector(".restart"); // Yeniden başlat butonu
 const text = result_box.querySelector(".score_text"); // Final skor metni
+const nameForm = result_box.querySelector(".name_form"); // İsim giriş formu
+const playerNameInput = document.getElementById("player_name"); // İsim giriş alanı
+const saveScoreBtn = document.getElementById("save_score"); // Skor kaydet butonu
+const leaderboardList = document.querySelector(".leaderboard_list"); // Liderlik tablosu listesi
 
 // Oyun Durum Değişkenleri
 let a; // Kare oluşturma için interval referansı
@@ -18,21 +22,91 @@ var count = 1; // Kare oluşturma sayacı
 var score = 0; // Oyuncunun skoru
 var step = 0; // Mevcut hız seviyesi
 var mar = randomMargin(), mar2; // Kareler için kenar boşluğu pozisyonları
+var hasSubmittedScore = false; // Skor gönderildi mi?
+
+// Liderlik tablosunu yükle
+async function loadLeaderboard() {
+    try {
+        const response = await fetch('api/get_leaderboard.php');
+        const data = await response.json();
+        
+        if (data.success) {
+            const scores = data.scores;
+            const topScoresList = document.querySelector('.top-scores-list');
+            
+            // Sadece ilk 3 skoru göster
+            topScoresList.innerHTML = scores.slice(0, 3).map((score, index) => `
+                <div class="top-score-item">
+                    <div class="rank">#${index + 1}</div>
+                    <div class="player-name">${score.username}</div>
+                    <div class="player-score">${score.score}</div>
+                </div>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Error loading leaderboard:', error);
+    }
+}
+
+// Skoru kaydet
+async function saveScore(name) {
+    try {
+        const response = await fetch('api/save_score.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: name,
+                score: score
+            })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            hasSubmittedScore = true;
+            nameForm.style.display = 'none';
+            loadLeaderboard(); // Liderlik tablosunu güncelle
+        }
+    } catch (error) {
+        console.error('Error saving score:', error);
+    }
+}
 
 // Oyun bittiğinde sonuç ekranını göster
 function viewResult(){
-  game.style.display = "none";
-  results.play();
-  result_box.classList.add("activeResult");
-  text.innerText = "You've scored " + score + " points";
+    game.style.display = "none";
+    results.play();
+    result_box.classList.add("activeResult");
+    text.innerText = "You've scored " + score + " points";
+    
+    // İlk kez oynuyorsa isim formunu göster
+    if (!hasSubmittedScore) {
+        nameForm.style.display = 'flex';
+    }
+    
+    // Liderlik tablosunu yükle
+    loadLeaderboard();
 }
+
+// Skor kaydet butonuna tıklandığında
+saveScoreBtn.onclick = () => {
+    const name = playerNameInput.value.trim();
+    if (name) {
+        saveScore(name);
+    } else {
+        alert('Lütfen isminizi girin!');
+    }
+};
 
 // Yeniden başlatıldığında oyun durumunu sıfırla
 restart.onclick = ()=>{
-  start.style.display = "block";
-  result_box.classList.remove("activeResult");
-  sco.innerText = 0;
-  audio.currentTime = 0;
+    start.style.display = "block";
+    result_box.classList.remove("activeResult");
+    sco.innerText = 0;
+    audio.currentTime = 0;
+    score = 0;
+    hasSubmittedScore = false;
 }
 
 // Arka plan müziğini başlat ve döngüye al

@@ -22,6 +22,11 @@ Modern bir Piano Tiles oyunu implementasyonu. Leaderboard sistemi ve çoklu şar
 
 1. Hostinger hesabınızda MySQL veritabanı oluşturun
 2. Veritabanı tablolarını oluşturun:
+hostname :  srv1924.hstgr.io
+MySQL database name : u274988421_pianotiles
+MySQL username : u274988421_admin
+Password : TP#b)d3BN5oY0SxoKByg*tG(
+
 ```sql
 CREATE TABLE scores (
     id INT AUTO_INCREMENT PRIMARY KEY,
